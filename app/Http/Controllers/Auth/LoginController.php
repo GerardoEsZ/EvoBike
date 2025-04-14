@@ -9,21 +9,16 @@ class LoginController extends Controller
 {
     use AuthenticatesUsers;
 
-    /**
-     * Donde redirigir a los usuarios después de iniciar sesión.
-     *
-     * @var string
-     */
-    protected $redirectTo = '/home';
+    protected $redirectTo = '/redirect-by-role';
 
-    /**
-     * Crea una nueva instancia del controlador.
-     *
-     * @return void
-     */
     public function __construct()
     {
         $this->middleware('guest')->except('logout');
     }
-}
 
+    // Este método renderiza el formulario de login (ya viene por defecto)
+    public function showLoginForm()
+    {
+        return view('auth.login');
+    }
+}

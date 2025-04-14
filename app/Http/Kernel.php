@@ -45,5 +45,6 @@ class Kernel extends HttpKernel
         'auth' => \App\Http\Middleware\Authenticate::class,
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
         'role' => \App\Http\Middleware\RoleMiddleware::class, // 👈 aquí lo agregas para que funcione
+        \App\Http\Middleware\SetUserLocale::class,
     ];
 }

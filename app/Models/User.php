@@ -7,11 +7,12 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use Illuminate\Database\Eloquent\Model;
 use Spatie\Permission\Traits\HasRoles; // Agregar esto para roles
 
 class User extends Authenticatable
 {
-    use HasApiTokens, HasFactory, Notifiable, HasRoles; // Incluir HasRoles para roles
+    use HasApiTokens, HasFactory, Notifiable;
 
     /**
      * Los atributos que se pueden asignar de forma masiva.
@@ -22,8 +23,8 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
-        'language', // Campo para el idioma
-    ];
+        'language',
+    ];    
 
     /**
      * Los atributos que deberían ser ocultados para los arrays.

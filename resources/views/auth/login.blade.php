@@ -1,26 +1,54 @@
-@extends('layouts.app')
+<x-guest-layout>
+    <div class="login-container">
+        <div class="login-box">
+            <h2>Welcome Back</h2>
+            <form method="POST" action="{{ route('login') }}">
+                @csrf
 
-@section('content')
-<div class="min-h-screen bg-gradient-to-r from-blue-200 to-purple-300 flex items-center justify-center">
-    <div class="bg-white p-8 rounded-2xl shadow-2xl w-full max-w-md animate-fade-in">
-        <h2 class="text-3xl font-bold text-center mb-6 text-gray-700">🚲 Inicia Sesión en <span class="text-indigo-600">EvoBike</span></h2>
-        
-        <form method="POST" action="{{ route('login') }}">
-            @csrf
+                <!-- Email Address -->
+                <div class="input-group">
+                    <i class="fas fa-envelope"></i>
+                    <input id="email" class="input-field" type="email" name="email" :value="old('email')" required autofocus autocomplete="username" placeholder="Email" />
+                    <x-input-error :messages="$errors->get('email')" class="mt-2" />
+                </div>
 
-            <div class="mb-4">
-                <label class="block mb-1 text-gray-700">Correo</label>
-                <input type="email" name="email" class="w-full border rounded-lg p-2 focus:outline-none focus:ring focus:border-blue-300" required>
+                <!-- Password -->
+                <div class="input-group mt-4">
+                    <i class="fas fa-lock"></i>
+                    <input id="password" class="input-field" type="password" name="password" required autocomplete="current-password" placeholder="Password" />
+                    <x-input-error :messages="$errors->get('password')" class="mt-2" />
+                </div>
+
+                <!-- Remember Me -->
+                <div class="block mt-4">
+                    <label for="remember_me" class="inline-flex items-center">
+                        <input id="remember_me" type="checkbox" name="remember" class="checkbox" />
+                        <span class="remember-text">Remember me</span>
+                    </label>
+                </div>
+
+                <div class="actions">
+                    @if (Route::has('password.request'))
+                        <a href="{{ route('password.request') }}" class="forgot-password">Forgot your password?</a>
+                    @endif
+
+                    <button type="submit" class="submit-btn">Log in</button>
+                </div>
+            </form>
+
+            <!-- Language Selector -->
+            <div class="language-selector">
+                <select onchange="changeLanguage(this)">
+                    <option value="en" {{ app()->getLocale() == 'en' ? 'selected' : '' }}>English</option>
+                    <option value="es" {{ app()->getLocale() == 'es' ? 'selected' : '' }}>Español</option>
+                </select>
             </div>
-
-            <div class="mb-6">
-                <label class="block mb-1 text-gray-700">Contraseña</label>
-                <input type="password" name="password" class="w-full border rounded-lg p-2 focus:outline-none focus:ring focus:border-blue-300" required>
-            </div>
-
-            <button type="submit" class="w-full bg-indigo-600 text-white p-2 rounded-lg hover:bg-indigo-700 transition duration-300">Ingresar</button>
-        </form>
+        </div>
     </div>
-</div>
-@endsection
+</x-guest-layout>
 
+<script>
+    function changeLanguage(language) {
+        window.location.href = `/lang/${language.value}`;
+    }
+</script>
