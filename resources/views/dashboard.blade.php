@@ -14,4 +14,7 @@
             </div>
         </div>
     </div>
+    <a href="{{ route('admin.registerUser') }}" class="bg-indigo-500 text-white px-4 py-2 rounded hover:bg-indigo-600">
+    Registrar nuevo usuario
+</a>
 </x-app-layout>

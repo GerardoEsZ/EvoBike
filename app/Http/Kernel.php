@@ -17,6 +17,8 @@ class Kernel extends HttpKernel
         \App\Http\Middleware\TrimStrings::class,
         \Illuminate\Foundation\Http\Middleware\ConvertEmptyStringsToNull::class,
         \App\Http\Middleware\SetUserLocale::class, // Este es el middleware que cambia el idioma del usuario
+
+
     ];
 
     /**
@@ -29,6 +31,7 @@ class Kernel extends HttpKernel
             \Illuminate\Session\Middleware\StartSession::class,
             \Illuminate\View\Middleware\ShareErrorsFromSession::class,
             \App\Http\Middleware\VerifyCsrfToken::class,
+            \App\Http\Middleware\SetLocale::class, // <-- Aquí lo agregas
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
         ],
 
