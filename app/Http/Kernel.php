@@ -16,9 +16,7 @@ class Kernel extends HttpKernel
         \Illuminate\Foundation\Http\Middleware\ValidatePostSize::class,
         \App\Http\Middleware\TrimStrings::class,
         \Illuminate\Foundation\Http\Middleware\ConvertEmptyStringsToNull::class,
-        \App\Http\Middleware\SetUserLocale::class, // Este es el middleware que cambia el idioma del usuario
-
-
+        \App\Http\Middleware\SetUserLocale::class,
     ];
 
     /**
@@ -31,7 +29,7 @@ class Kernel extends HttpKernel
             \Illuminate\Session\Middleware\StartSession::class,
             \Illuminate\View\Middleware\ShareErrorsFromSession::class,
             \App\Http\Middleware\VerifyCsrfToken::class,
-            \App\Http\Middleware\SetLocale::class, // <-- Aquí lo agregas
+            \App\Http\Middleware\SetLocale::class,
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
         ],
 
@@ -47,7 +45,15 @@ class Kernel extends HttpKernel
     protected $routeMiddleware = [
         'auth' => \App\Http\Middleware\Authenticate::class,
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
-        'role' => \App\Http\Middleware\RoleMiddleware::class, // 👈 aquí lo agregas para que funcione
+        'role' => \App\Http\Middleware\RoleMiddleware::class, // Esta línea debe estar aquí
         \App\Http\Middleware\SetUserLocale::class,
+    ];
+    
+        'permission' => \Spatie\Permission\Middlewares\PermissionMiddleware::class,
+        'role_or_permission' => \Spatie\Permission\Middlewares\RoleOrPermissionMiddleware::class,
+
+        // Otros middleware
+        'locale' => \App\Http\Middleware\SetLocale::class,
+        'userLocale' => \App\Http\Middleware\SetUserLocale::class,
     ];
 }
